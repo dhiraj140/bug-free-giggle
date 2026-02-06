@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DB College - Online Result Portal</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/x-icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎓</text></svg>">
+</head>
+<body>
+    <!-- Header Section -->
+    <header class="header">
+        <div class="container">
+            <div class="logo-container">
+                <div class="logo-icon">
+                    <i class="fas fa-graduation-cap"></i>
+                </div>
+                <div class="logo-text">
+                    <h1>DB College</h1>
+                    <p>Online Result Portal</p>
+                </div>
+            </div>
+            <div class="header-info">
+                <p><i class="fas fa-calendar-alt"></i> Academic Year 2024-25</p>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container">
+            <!-- Welcome Section -->
+            <section class="welcome-section">
+                <div class="welcome-card">
+                    <h2>Welcome to DB College Result Portal</h2>
+                    <p>Enter your class and roll number to check your examination results. Results are fetched directly from the college database.</p>
+                    <div class="stats">
+                        <div class="stat-item">
+                            <span class="stat-number">6</span>
+                            <span class="stat-label">Classes</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number">500+</span>
+                            <span class="stat-label">Students</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number">24/7</span>
+                            <span class="stat-label">Access</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Search Form Section -->
+            <section class="search-section">
+                <div class="search-card">
+                    <h3><i class="fas fa-search"></i> Check Your Result</h3>
+                    <p class="instruction">Please select your class and enter your roll number exactly as provided by the college.</p>
+                    
+                    <form id="resultForm">
+                        <div class="form-group">
+                            <label for="standardSelect"><i class="fas fa-chalkboard-teacher"></i> Select Standard</label>
+                            <select id="standardSelect" class="form-control" required>
+                                <option value="" disabled selected>Choose your class</option>
+                                <option value="5th">5th Standard</option>
+                                <option value="6th">6th Standard</option>
+                                <option value="7th">7th Standard</option>
+                                <option value="8th">8th Standard</option>
+                                <option value="9th">9th Standard</option>
+                                <option value="10th">10th Standard</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="rollNumber"><i class="fas fa-id-card"></i> Roll Number</label>
+                            <input type="text" id="rollNumber" class="form-control" placeholder="Enter your roll number" required>
+                            <p class="input-hint">Example: 2024001, 2024002, etc.</p>
+                        </div>
+                        
+                        <button type="submit" id="checkResult" class="btn-primary">
+                            <i class="fas fa-check-circle"></i> Check Result
+                        </button>
+                    </form>
+                    
+                    <div class="note-box">
+                        <p><i class="fas fa-info-circle"></i> <strong>Note:</strong> If you face any issues, please contact the college administration office.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Result Display Section -->
+            <section class="result-section" id="resultSection" style="display: none;">
+                <div class="result-card">
+                    <div class="result-header">
+                        <h3><i class="fas fa-award"></i> Examination Result</h3>
+                        <button id="printResult" class="btn-secondary">
+                            <i class="fas fa-print"></i> Print Result
+                        </button>
+                    </div>
+                    
+                    <div id="loading" class="loading" style="display: none;">
+                        <div class="spinner"></div>
+                        <p>Fetching result data...</p>
+                    </div>
+                    
+                    <div id="resultContent">
+                        <!-- Result will be displayed here -->
+                    </div>
+                    
+                    <div id="errorMessage" class="error-message" style="display: none;">
+                        <!-- Error message will be displayed here -->
+                    </div>
+                    
+                    <div class="result-footer">
+                        <p><i class="fas fa-stamp"></i> This is an electronically generated document. No signature required.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Instructions Section -->
+            <section class="instructions-section">
+                <div class="instructions-card">
+                    <h3><i class="fas fa-question-circle"></i> How to Use This Portal</h3>
+                    <div class="instructions-steps">
+                        <div class="step">
+                            <div class="step-number">1</div>
+                            <div class="step-content">
+                                <h4>Select Your Class</h4>
+                                <p>Choose your class (5th to 10th) from the dropdown menu.</p>
+                            </div>
+                        </div>
+                        <div class="step">
+                            <div class="step-number">2</div>
+                            <div class="step-content">
+                                <h4>Enter Roll Number</h4>
+                                <p>Type your roll number exactly as provided by the college.</p>
+                            </div>
+                        </div>
+                        <div class="step">
+                            <div class="step-number">3</div>
+                            <div class="step-content">
+                                <h4>Check Result</h4>
+                                <p>Click "Check Result" to view your marksheet instantly.</p>
+                            </div>
+                        </div>
+                        <div class="step">
+                            <div class="step-number">4</div>
+                            <div class="step-content">
+                                <h4>Print if Needed</h4>
+                                <p>Use the "Print Result" button to get a hard copy.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <h3>DB College</h3>
+                    <p>Excellence in Education Since 1995</p>
+                </div>
+                <div class="footer-info">
+                    <p><i class="fas fa-map-marker-alt"></i> College Road, Education Nagar, City - 123456</p>
+                    <p><i class="fas fa-phone"></i> +91 98765 43210 | <i class="fas fa-envelope"></i> info@dbcollege.edu</p>
+                </div>
+                <div class="footer-copyright">
+                    <p>© 2024 DB College. All rights reserved. | Online Result Portal v2.0</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
